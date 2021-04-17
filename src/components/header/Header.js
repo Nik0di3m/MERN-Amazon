@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { HeaderContainer, HeaderSearchIconContainer, HeaderLogo, HeaderOptionAdress, HeaderSearachInput, HeaderSearchBar, OptionLineOne, OptionLineTwo, HeaderNavItems, HeaderOption, HeaderOptionCart, CartCount } from './HeaderElements.js'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { Link } from 'react-router-dom';
+import { selectUser } from '../../features/userSlice.js';
+import { useSelector } from 'react-redux';
+import { selectCount } from '../../features/cartSlice.js';
+
+
+
 
 const Header = () => {
+
+    const count = useSelector(selectCount)
+    const user = useSelector(selectUser)
+
+    useEffect(() => {
+        console.log(count)
+    })
+
     return (
         <div>
             <HeaderContainer>
@@ -29,7 +43,7 @@ const Header = () => {
 
                     <HeaderOption>
                         <OptionLineOne>
-                            Hello Nikodem
+                            Hello {user}
                         </OptionLineOne>
                         <OptionLineTwo>
                             Account & List
@@ -48,7 +62,7 @@ const Header = () => {
                     <HeaderOptionCart>
                         <Link to="/cart"><ShoppingBasketIcon /></Link>
                         <CartCount>
-                            4
+                            {count}
                         </CartCount>
                     </HeaderOptionCart>
 
